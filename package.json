@@ -1,0 +1,4 @@
+{
+    "name" : "weatherdatatools",
+    "main" : "./weatherdatatools.js"
+}
