@@ -13,7 +13,6 @@ module.exports = class condition_tracker {
   addObservation(obs) {
     this.#observations[unixDT()] = obs
     this.#latest = obs
-
   }
 
   filterObservations_timeSpan(timeSpan = 0) {
@@ -48,11 +47,18 @@ module.exports = class condition_tracker {
   }
 
   state() {
-    return this.#latest
+    return this.avg
   }
+
+  clear() {
+    var val = this.state()
+    this.#observations = []
+    return val
+  }
+
 }
   
-  function unixDT () {
-    return Math.round(new Date().getTime() / 1000)
-  }
+function unixDT () {
+  return Math.round(new Date().getTime() / 1000)
+}
   

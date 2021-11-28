@@ -1,8 +1,7 @@
 const Condition_tracker = require('./condition_tracker')
 
-module.exports = class Temperature extends Condition_tracker {
-  
-  constructor(units = 'C', maxObservationAge = 3600) {
+module.exports = class Humidity extends Condition_tracker {
+  constructor(units = '%', maxObservationAge = 3600) {
     super(units, maxObservationAge)
   }
 

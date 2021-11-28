@@ -1,4 +1,14 @@
 {
-    "name" : "weatherdatatools",
-    "main" : "./weatherdatatools.js"
+    "name": "weatherdatatools",
+    "version": "0.1.0",
+    "description": "OpenWeatherMap Node API",
+    "main": "./weatherdatatools.js",
+    "scripts": {
+        "test": "mocha"
+    },
+    "author": "Damon L. Vincent",
+    "license": "MIT",
+    "devDependencies": {
+        "mocha": "^9.1.3"
+    }
 }
