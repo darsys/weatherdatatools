@@ -1,6 +1,6 @@
-const Condition_tracker = require('./condition_tracker')
+const Condition = require('./condition')
 
-module.exports = class Wind extends Condition_tracker {
+module.exports = class Wind extends Condition {
 
   constructor(units = 'm/s', maxObservationAge = 3600) {
     super(units, maxObservationAge)

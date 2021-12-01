@@ -1,18 +1,26 @@
-module.exports = class condition_tracker {
+module.exports = class Condition {
 
   #observations = []
   #latest
   
-  constructor(units = '', maxObservationAge = 300) {
+  constructor(units = '', maxObservationAge = 300, observations = []) {
     this.config = {
       units: units,
       maxObservationAge: maxObservationAge
     }
+    if (observations.length) {
+      this.#observations = observations
+      this.#latest = observations[getMaxKey(observations)]
+    }
   }
 
-  addObservation(obs) {
-    this.#observations[unixDT()] = obs
-    this.#latest = obs
+  get config() {
+    return this.config
+  }
+
+  addObservation(observationValue, unixDT = unixDT()) {
+    this.#observations[unixDT] = observationValue
+    this.#latest = observationValue
   }
 
   filterObservations_timeSpan(timeSpan = 0) {
@@ -50,6 +58,10 @@ module.exports = class condition_tracker {
     return this.avg
   }
 
+  observations() {
+    return this.#observations
+  }
+
   clear() {
     var val = this.state()
     this.#observations = []
@@ -57,7 +69,15 @@ module.exports = class condition_tracker {
   }
 
 }
-  
+
+function getMaxKey(obj) {
+  return Math.max.apply(null,Object.keys(obj));
+}
+
+function getMinKey(obj) {
+  return Math.min.apply(null,Object.keys(obj));
+}
+
 function unixDT () {
   return Math.round(new Date().getTime() / 1000)
 }

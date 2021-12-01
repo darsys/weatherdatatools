@@ -1,18 +1,22 @@
-const Condition_tracker = require('./condition_tracker')
-module.exports = class WindDirection extends Condition_tracker {
-    
-    constructor(units = 'mm', maxObservationAge = 3600) {
-        super(units, maxObservationAge)
-    }
+const Condition = require('./condition')
+module.exports = class WindDirection extends Condition {
 
-    state() {
-        return this.avg(60)
-    }
+  constructor(units = 'deg', maxObservationAge = 300) {
+    super(units, maxObservationAge)
+  }
 
-    cardinalDir() {
-        var val = Math.floor((this.state() / 22.5) + 0.5);
-        var arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
-        return arr[(val % 16)];
-    }
+  state() {
+    return this.avg(60)
+  }
+
+  cardinal() {
+    return this.cardinalFromDegree(this.state())
+  }
+
+  static cardinalFromDegree(degrees) {
+    var val = Math.floor((degrees / 22.5) + 0.5);
+    var arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
+    return arr[(val % 16)];
+  }
 
 }

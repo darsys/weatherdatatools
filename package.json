@@ -1,14 +1,19 @@
 {
-    "name": "weatherdatatools",
-    "version": "0.1.0",
-    "description": "OpenWeatherMap Node API",
-    "main": "./weatherdatatools.js",
-    "scripts": {
-        "test": "mocha"
-    },
-    "author": "Damon L. Vincent",
-    "license": "MIT",
-    "devDependencies": {
-        "mocha": "^9.1.3"
-    }
+  "name": "weatherdatatools",
+  "version": "0.1.0",
+  "description": "Weather data tools",
+  "main": "./weatherdatatools.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Damon L. Vincent",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "eslint": "^8.3.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "mocha": "^9.1.3",
+    "prettier": "^2.5.0"
+  }
 }

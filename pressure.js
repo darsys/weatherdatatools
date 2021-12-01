@@ -1,8 +1,7 @@
 const Condition = require('./condition')
+module.exports = class Pressure extends Condition {
 
-module.exports = class Temperature extends Condition {
-  
-  constructor(units = 'C', maxObservationAge = 3600) {
+  constructor(units = 'deg', maxObservationAge = 300) {
     super(units, maxObservationAge)
   }
 

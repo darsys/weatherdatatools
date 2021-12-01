@@ -1,6 +1,6 @@
-const Condition_tracker = require('./condition_tracker')
+const Condition = require('./conditionf')
 
-module.exports = class Humidity extends Condition_tracker {
+module.exports = class Humidity extends Condition {
   constructor(units = '%', maxObservationAge = 3600) {
     super(units, maxObservationAge)
   }
