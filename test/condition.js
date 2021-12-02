@@ -1,60 +1,39 @@
-const assert = require('assert').strict;
-var Condition = require('../condition.js')
+// const assert = require('assert').strict;
+const expect = require('chai').expect
+const Condition = require('../condition.js')
+const math = require('mathjs')
 
-const rainTestObservations = [22, 22, 22.5, 22.75, 23, 23.5, 23.5, 24, 24.5, 25]
+const testObservations = [22, 22, 22.5, 22.75, 23, 23.5, 23.5, 24, 24.5, 25]
 const observations = {}
 // create test observation array
-const udt = unixDT()
-for ( let i = 0; i < rainTestObservations.length; i++ ) {
-  observations[udt + i * 50] = rainTestObservations[i]
+const udt = unixDT() - 300
+for ( let i = 0; i < testObservations.length; i++ ) {
+  observations[udt + i * 50] = testObservations[i]
 }
+console.log(observations)
 
-describe('condition object', function() {
-  context('without arguments', function() {
-    it('should return range of observations', function() {
-      let condition = new Condition()
-      for (const [key, value] of Object.entries(observations)) {
-        condition.addObservation(value,key)
-      }
-            [
-                { title: "run code", completed: false },
-                { title: "test everything", completed: false }
-            ]
-        );
-      expect(rain()).to.equal(0)
+describe('condition object test', function() {
+  context('default constructor arguments', function() {
+    let condition = new Condition()
+    for (const [key, value] of Object.entries(observations)) {
+      condition.addObservation(value, key)
+    }
+    console.log(condition.observationList())
+    it('observations array object created correctly', function() {
+      console.log(condition.observationList())
+      expect(condition.observationList()).to.eql(observations)
+    })
+    it('avg of observations', function() {
+      expect(condition.avg()).to.equal(math.mean(testObservations))
+    })
+    it('max of observations', function() {
+      expect(condition.max()).to.equal(math.max(testObservations))
+    })
+    it('range of observations', function() {
+      expect(condition.range()).to.equal(math.max(testObservations)-math.min(testObservations))
     })
   })
-  
-  // context('with number arguments', function() {
-  //   it('should return sum of arguments', function() {
-  //     expect(sum(1, 2, 3, 4, 5)).to.equal(15)
-  //   })
-    
-  //   it('should return argument when only one argument is passed', function() {
-  //     expect(sum(5)).to.equal(5)
-  //   })
-  // })
-  
-  // context('with non-number arguments', function() {
-  //   it('should throw error', function() {
-  //     expect(function() {
-  //       sum(1, 2, '3', [4], 5)
-  //     }).to.throw(TypeError, 'sum() expects only numbers.')
-  //   })
-  // })
-  
 })
-
-function testConditionArray() {
-  const TestObservations = [22, 22, 22.5, 22.75, 23, 23.5, 23.5, 24, 24.5, 25]
-  const observations = {}
-  // create test observation array
-  const udt = unixDT()
-  for ( let i = 0; i < rainTestObservations.length; i++ ) {
-    observations[udt + i * 50] = rainTestObservations[i]
-  }
-  return observations
-}
 
 function unixDT () {
   return Math.round(new Date().getTime() / 1000)

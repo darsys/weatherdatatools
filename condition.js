@@ -1,35 +1,42 @@
+const Math = require('mathjs')
+
 module.exports = class Condition {
 
-  #observations = []
+  #config
+  #observations = {}
   #latest
   
-  constructor(units = '', maxObservationAge = 300, observations = []) {
-    this.config = {
+  constructor(units = '', maxObservationAge = 300, observations = {}) {
+    this.#config = {
       units: units,
       maxObservationAge: maxObservationAge
     }
+    // console.debug(observations)
     if (observations.length) {
       this.#observations = observations
       this.#latest = observations[getMaxKey(observations)]
+      // console.debug(this.#observations.length())
     }
   }
 
   get config() {
-    return this.config
+    return this.#config
   }
 
-  addObservation(observationValue, unixDT = unixDT()) {
-    this.#observations[unixDT] = observationValue
-    this.#latest = observationValue
+  addObservation(observationValue, key) {
+    // var key = new Date().getTime() / 1000
+    this.#observations[key] = observationValue
+    // this.#latest = observationValue
   }
 
-  filterObservations_timeSpan(timeSpan = 0) {
-    if (timeSpan === 0) return this.#observations
+  filterObservations= (timeSpan = 0) => {
+    // console.log(this)
+    if (timeSpan === 0) return Object.values(this.#observations)
     else {
       return Object.keys(this.#observations).filter((key) => {
         return key < unixDT() - timeSpan
       }).reduce((cur, key) => { 
-        return Object.assign(cur, { [key]: this.#observations[key] })
+        return Object.values(Object.assign(cur, { [key]: this.#observations[key] }))
       }, {})
     }
   }
@@ -39,11 +46,12 @@ module.exports = class Condition {
   }
 
   range(timeSpan = 0) {
-    return Math.range(this.filterObservations(timeSpan))
+    var obs = this.filterObservations(timeSpan)
+    return Math.max(obs)-Math.min(obs)
   }
 
   avg(timeSpan = 0) {
-    return Math.max(this.filterObservations(timeSpan))
+    return Math.mean(this.filterObservations(timeSpan))
   }
 
   max(timeSpan = 0) {
@@ -58,7 +66,7 @@ module.exports = class Condition {
     return this.avg
   }
 
-  observations() {
+  observationList() {
     return this.#observations
   }
 
@@ -81,4 +89,3 @@ function getMinKey(obj) {
 function unixDT () {
   return Math.round(new Date().getTime() / 1000)
 }
-  
