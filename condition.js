@@ -6,7 +6,7 @@ module.exports = class Condition {
   #observations = {}
   #latest
   
-  constructor(units = '', maxObservationAge = 300, observations = {}) {
+  constructor(units = '', maxObservationAge = 86400, observations = {}) {
     this.#config = {
       units: units,
       maxObservationAge: maxObservationAge
@@ -29,33 +29,44 @@ module.exports = class Condition {
     // this.#latest = observationValue
   }
 
-  filterObservations= (timeSpan = 0) => {
-    // console.log(this)
+  getObservations = (timeSpan = 0) => {
+    // console.log(`filter observations with timespan: ${timeSpan}`)
     if (timeSpan === 0) return Object.values(this.#observations)
     else {
+      var filteredKeys = Object.keys(this.#observations).filter((key) => {
+        return key >= unixDT() - timeSpan
+      })
+      // console.log(filteredKeys)
       return Object.keys(this.#observations).filter((key) => {
-        return key < unixDT() - timeSpan
+        return key >= unixDT() - timeSpan
       }).reduce((cur, key) => { 
         return Object.values(Object.assign(cur, { [key]: this.#observations[key] }))
       }, {})
     }
   }
 
+  removeStaleObservations = () => {
+    var dateTimes = Object.keys(this.#observations)
+    dateTimes.forEach( (key) => {
+      delete this.#observations[key]
+    })
+  }
+
   sum(timeSpan = 0) {
-    return Math.sum(this.filterObservations(timeSpan))
+    return Math.sum(this.getObservations(timeSpan))
   }
 
   range(timeSpan = 0) {
-    var obs = this.filterObservations(timeSpan)
+    var obs = this.getObservations(timeSpan)
     return Math.max(obs)-Math.min(obs)
   }
 
   avg(timeSpan = 0) {
-    return Math.mean(this.filterObservations(timeSpan))
+    return Math.mean(this.getObservations(timeSpan))
   }
 
   max(timeSpan = 0) {
-    return Math.max(this.filterObservations(timeSpan))
+    return Math.max(this.getObservations(timeSpan))
   }
 
   latest() {
@@ -66,7 +77,7 @@ module.exports = class Condition {
     return this.avg
   }
 
-  observationList() {
+  observationsList() {
     return this.#observations
   }
 

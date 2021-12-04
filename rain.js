@@ -7,7 +7,7 @@ module.exports = class Rain extends Condition {
   }
 
   state() {
-    return super.range(300)
+    return super.range(3600)
   }
 
   rain_5m() {
