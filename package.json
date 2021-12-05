@@ -1,6 +1,6 @@
 {
   "name": "weatherdatatools",
-  "version": "0.1.0",
+  "version": "0.5.0",
   "description": "Weather data tools",
   "main": "./weatherdatatools.js",
   "scripts": {

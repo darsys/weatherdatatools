@@ -6,16 +6,16 @@ module.exports = class Wind extends Condition {
     super(units, maxObservationAge)
   }
 
-  state(timeSpan = 120) {
+  state(timeSpan = 300) {
     return super.avg(timeSpan)
   }
 
-  windAvg(timeSpan = 120) {
+  windAvg(timeSpan = 300) {
     return super.avg(timeSpan)
   }
 
-  windGust(timeSpan = 120) {
-    return Math.max(this.filterObservations(timeSpan))
+  windGust = (timeSpan = 300) => {
+    return Math.max(super.max(timeSpan))
   }
 
   static wind_mph_kph(windSpeedMPH) {

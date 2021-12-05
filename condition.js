@@ -33,8 +33,9 @@ module.exports = class Condition {
     // console.log(`filter observations with timespan: ${timeSpan}`)
     if (timeSpan === 0) return Object.values(this.#observations)
     else {
+      var oldestDateTime = unixDT() - timeSpan
       var filteredKeys = Object.keys(this.#observations).filter((key) => {
-        return key >= unixDT() - timeSpan
+        return key >= oldestDateTime
       })
       // console.log(filteredKeys)
       return Object.keys(this.#observations).filter((key) => {
