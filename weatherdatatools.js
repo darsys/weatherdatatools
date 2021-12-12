@@ -1,8 +1,8 @@
 const condition = require('./condition')
-const temperature = require('./temperature.js')
-const humidity = require('./humidity.js')
-const pressure = require('./pressure.js')
-const rain = require('./rain.js')
-const wind = require('./wind_speed.js')
-
-module.exports = { temperature, humidity, pressure, rain, wind, condition }
+const temperature = require('./temperature')
+const humidity = require('./humidity')
+const pressure = require('./pressure')
+const rain = require('./rain')
+const wind_speed = require('./wind_speed')
+const wind_direction = require('./wind_direction')
+module.exports = { temperature, humidity, pressure, rain, wind_speed, wind_direction, condition }

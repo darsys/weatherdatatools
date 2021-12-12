@@ -47,7 +47,10 @@ module.exports = class Condition {
   }
 
   removeStaleObservations = () => {
-    var dateTimes = Object.keys(this.#observations)
+    var oldestDateTime = unixDT() - this.config.maxObservationAge
+    var dateTimes = Object.keys(this.#observations).filter( (key) => {
+      key < oldestDateTime
+    })
     dateTimes.forEach( (key) => {
       delete this.#observations[key]
     })
