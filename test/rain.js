@@ -4,11 +4,10 @@ const math = require('mathjs')
 
 // using a test data object to define test array creation
 const observationsTestObject = {
-  0: 4,
-  300: 3,
+  300: 0,
   3600: 2,
-  43200: 1,
-  86400: 0
+  43200: 4,
+  86400: 8
 }
 const currentDT = unixDT()
 const observations = {}
@@ -26,19 +25,19 @@ describe('rain object test', function() {
     }
     // console.log(rain.observationsList())
     it('state property should return 1 hour rain accumulation', function() {
-      expect(rain.state()).to.eql(2)
+      expect(rain.state()).to.eql(arrayRange([1,2]))
     })
     it('rain_5m', function() {
-      expect(rain.rain_5m()).to.equal(1)
+      expect(rain.rain_5m()).to.equal(arrayRange([1]))
     })
     it('rain_1h', function() {
-      expect(rain.rain_1h()).to.equal(2)
+      expect(rain.rain_1h()).to.equal(arrayRange([1,2]))
     })
     it('rain_12h', function() {
-      expect(rain.rain_12h()).to.equal(3)
+      expect(rain.rain_12h()).to.equal(arrayRange([1,2,3]))
     })
     it('rain_24h', function() {
-      expect(rain.rain_24h()).to.equal(4)
+      expect(rain.rain_24h()).to.equal(arrayRange([1,2,3,7]))
     })
   })
 })
