@@ -4,10 +4,10 @@ const math = require('mathjs')
 
 // using a test data object to define test array creation
 const observationsTestObject = {
-  300: 0,
+  300: 1,
   3600: 2,
-  43200: 4,
-  86400: 8
+  43200: 3,
+  86400: 7
 }
 const currentDT = unixDT()
 const observations = {}
