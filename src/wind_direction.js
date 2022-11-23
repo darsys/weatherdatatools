@@ -10,7 +10,7 @@ module.exports = class WindDirection extends Condition {
    * @return {Number}  The current wind direction in degrees from 0 (North)
    */
   state() {
-    return this.avg(60)
+    return this.avg(300)
   }
 
   /**

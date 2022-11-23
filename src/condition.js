@@ -4,7 +4,6 @@ module.exports = class Condition {
 
   #config
   #observations = {}
-  #latest
   
   constructor(units = '', maxObservationAge = 86400, observations = {}) {
     this.#config = {
@@ -14,8 +13,7 @@ module.exports = class Condition {
     // console.debug(observations)
     if (observations.length) {
       this.#observations = observations
-      this.#latest = observations[getMaxKey(observations)]
-      // console.debug(this.#observations.length())
+      console.debug(this.#observations.length())
     }
   }
 
@@ -74,7 +72,11 @@ module.exports = class Condition {
   }
 
   latest() {
-    return this.#latest
+    return this.#observations[this.maxKey]
+  }
+
+  oldest() {
+    return this.#observations[this.minKey]
   }
 
   state() {
@@ -91,14 +93,14 @@ module.exports = class Condition {
     return val
   }
 
-}
+  minKey() {
+    return Math.min(Object.keys(this.#observations))
+  }
 
-function getMaxKey(obj) {
-  return Math.max.apply(null,Object.keys(obj));
-}
+  maxKey() {
+    return Math.max(Object.keys(this.#observations))
+  }
 
-function getMinKey(obj) {
-  return Math.min.apply(null,Object.keys(obj));
 }
 
 function unixDT () {
