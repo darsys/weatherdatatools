@@ -6,7 +6,7 @@ module.exports = class Pressure extends Condition {
   }
 
   state() {
-    return this.avg(60)
+    return this.avg(3600)
   }
 
 }

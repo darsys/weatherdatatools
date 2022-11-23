@@ -39,12 +39,19 @@ describe('condition object test', function() {
     it('range of observations', function() {
       expect(condition.range()).to.equal(arrayRange(testObservations))
     })
+    it('latest condition time', function() {
+      expect(condition.maxKey()).to.equal(math.max(Object.keys(observations)))
+    })
+    it('latest condition', function() {
+      expect(condition.latest()).to.equal(observations[math.max(Object.keys(testObservations))])
+    })
   })
 })
 
 function arrayRange(arr) {
   return math.max(arr)-math.min(arr)
 }
+
 function unixDT () {
   return Math.round(new Date().getTime() / 1000)
 }
