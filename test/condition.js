@@ -1,6 +1,6 @@
 // const assert = require('assert').strict;
 const expect = require('chai').expect
-const Condition = require('../condition.js')
+const Condition = require('../src/condition.js')
 const math = require('mathjs')
 
 const testObservations = [22, 22, 22.5, 22.75, 23, 23.5, 23.5, 24, 24.5, 25]

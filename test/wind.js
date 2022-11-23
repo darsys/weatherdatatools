@@ -1,6 +1,6 @@
 const expect = require('chai').expect
-const Wind = require('../wind_speed.js')
-const math = require('mathjs')
+const Wind = require('../src/wind_speed.js')
+// const math = require('mathjs')
 
 // using a test data object to define test array creation
 const observationsTestObject = {

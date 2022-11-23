@@ -1,5 +1,5 @@
 const expect = require('chai').expect
-const Rain = require('../rain.js')
+const Rain = require('../src/rain.js')
 const math = require('mathjs')
 
 // using a test data object to define test array creation
