@@ -1,5 +1,5 @@
 # Weather data tools
-A js library with utilities to facilitate working with weather data. The objective of this library is to provide an object to push weather conditions (ie temperature, rainfall, wind speed, wind direction) into an object that can massage and (time) filter the data to provide more meaningfull weather conditions.
+weatherdatatools is a js library to facilitate working with weather data. This library means to provide objects in which to push weather condition readings (ie temperature, rainfall, wind speed, wind direction) over time that can then provide processed meaningful weather conditions.
 
 Examples:
 average windspeed 5 minutes
@@ -9,10 +9,7 @@ average cardinal wind direction - SSW
 ## Key components
 
 condition
-: base class for tracking a condition using an array of observations indexed by timeSpan (tS in seconds before now).  Class is designed around an array of observations stored by unix date time index. The class includes typical array functions like avg, min, max, span, latest.
-
-timeSpan
-: timeSpan represents seconds before now. For example timeSpan=300 is observations in the last 5 minutes (300 seconds)
+: Base class for tracking a condition using an array of observations indexed by timestamps. The class includes typical array functions like avg, min, max, span, latest. A key feature of this class is the ability to filter observations by timeSpam which represents seconds before now. For example a timeSpan of 300 would be observations in the last 5 minutes (300 seconds)
 
 rain
 : rain accumulation 5m,1h,12h,24h using a static rain value
@@ -29,6 +26,13 @@ temperature:
 humidity
 : avg
 
+## Example
+```javascript
+const wdt = require('weatherdatatools')
+
+const rain = 
+
+```
 
 ## Author
 
